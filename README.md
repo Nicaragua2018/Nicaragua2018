@@ -1,4 +1,4 @@
-- 👋 Hi, I’m @Claudio
+- 👋 Hi, I’m Claudio
 - 👀 I’m interested in life styles adn tecnology
 - 🌱 I’m currently learning data science and AI
 - 💞️ I’m looking to collaborate on partnership
