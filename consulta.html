@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultas Ciudadanas — Renacer Nicaragua</title>
+<meta name="description" content="Consultas ciudadanas de Renacer Nicaragua. Vota por proposiciones, construye consensos y define posiciones vinculantes del movimiento.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e1a26;
+  --paper: #f7f3ec;
+  --navy: #14263d;
+  --blue: #1a4a7a;
+  --gold: #c99a3e;
+  --gold-light: #f0c96a;
+  --green: #2a6648;
+  --red: #9f2f2f;
+  --muted: #6b7a8d;
+  --line: #ddd5c4;
+  --card: #ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.65}
+a{text-decoration:none}
+
+/* TOP NAV */
+.topnav{background:var(--navy);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--gold);flex-wrap:wrap;gap:8px;position:sticky;top:0;z-index:200}
+.topnav-back{display:flex;align-items:center;gap:8px;color:white;font-size:14px;font-weight:500}
+.topnav-back span{color:var(--gold);font-size:16px}
+.topnav-title{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.topnav-cta{background:var(--gold);color:var(--navy);padding:7px 16px;border-radius:999px;font-size:12px;font-weight:700;font-family:'IBM Plex Sans',sans-serif}
+.topnav-cta:hover{background:var(--gold-light)}
+
+/* BUTTONS */
+.btn-gold{background:var(--gold);color:var(--navy);padding:12px 26px;border-radius:999px;font-weight:700;font-size:14px;font-family:'IBM Plex Sans',sans-serif;border:none;cursor:pointer;transition:all .2s;display:inline-block}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-navy{background:var(--navy);color:white;padding:12px 26px;border-radius:999px;font-weight:600;font-size:14px;font-family:'IBM Plex Sans',sans-serif;border:none;cursor:pointer;transition:all .2s;display:inline-block}
+.btn-navy:hover{background:var(--blue);transform:translateY(-1px)}
+.btn-outline{border:2px solid var(--line);background:transparent;color:var(--navy);padding:10px 22px;border-radius:999px;font-weight:500;font-size:13px;font-family:'IBM Plex Sans',sans-serif;cursor:pointer;transition:all .2s;display:inline-block}
+.btn-outline:hover{border-color:var(--navy);background:var(--navy);color:white}
+
+/* HERO */
+.c-hero{background:var(--navy);background-image:radial-gradient(ellipse at 70% 30%,rgba(201,154,62,.18) 0%,transparent 55%);padding:72px 48px 60px;border-bottom:5px solid var(--gold);position:relative;overflow:hidden}
+.c-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:400px;height:400px;border:2px solid rgba(201,154,62,.1);border-radius:50%}
+.c-hero-inner{max-width:1180px;margin:0 auto;position:relative;z-index:1}
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);margin-bottom:18px}
+.c-hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,62px);font-weight:900;color:white;line-height:1.06;margin-bottom:14px}
+.c-hero h1 em{font-style:normal;color:var(--gold-light)}
+.c-hero p{font-size:16px;color:#a8c0d8;max-width:620px;font-weight:300;line-height:1.75;margin-bottom:28px}
+.c-hero-meta{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.meta-item{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7a9ab8;display:flex;align-items:center;gap:6px}
+.meta-dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+
+/* METHODOLOGY */
+.method-bar{background:#0d1d2e;padding:24px 48px;border-bottom:1px solid rgba(201,154,62,.2)}
+.method-inner{max-width:1180px;margin:0 auto;display:flex;gap:32px;align-items:center;flex-wrap:wrap}
+.method-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+.method-items{display:flex;gap:16px;flex-wrap:wrap}
+.method-chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);padding:5px 12px;border-radius:999px;font-size:12px;color:#a8c0d8;font-family:'IBM Plex Mono',monospace}
+
+/* CONSULTATION LIST */
+.c-list{padding:60px 48px;max-width:1180px;margin:0 auto}
+.c-list-header{margin-bottom:40px}
+.sec-kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,38px);font-weight:900;color:var(--navy);line-height:1.2;margin-bottom:12px}
+.sec-desc{font-size:15px;color:var(--muted);max-width:680px;font-weight:300;line-height:1.7}
+.divider{width:44px;height:4px;background:var(--gold);margin:16px 0 32px;border-radius:2px}
+.c-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-bottom:48px}
+
+/* CONSULTATION CARD */
+.c-card{background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.c-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(14,26,38,.1)}
+.c-card-top{height:6px}
+.c-card-body{padding:24px 24px 20px}
+.c-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:4px;font-size:10px;font-family:'IBM Plex Mono',monospace;font-weight:500;letter-spacing:.5px;margin-bottom:12px}
+.badge-vinculante{background:#fbeaea;color:#9f2f2f}
+.badge-informativa{background:#eef4fb;color:#1a4a7a}
+.c-card-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:8px}
+.c-card-source{font-size:12px;color:var(--muted);margin-bottom:10px;font-style:italic}
+.c-card-desc{font-size:13px;color:#4a5a6a;line-height:1.6;font-weight:300;margin-bottom:16px}
+.c-card-stats{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.c-stat{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.c-stat strong{color:var(--navy)}
+.c-progress-wrap{margin-bottom:16px}
+.c-progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px}
+.c-progress{height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+.c-progress-fill{height:100%;background:var(--gold);border-radius:999px;transition:width .5s}
+.c-quorum{font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:16px}
+.c-quorum strong{color:var(--red)}
+.c-card-footer{padding:14px 24px;border-top:1px solid var(--line);background:#fafaf8;display:flex;align-items:center;justify-content:space-between}
+.c-deadline{font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace}
+.c-btn-start{background:var(--navy);color:white;border:none;padding:8px 18px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;transition:background .2s}
+.c-btn-start:hover{background:var(--blue)}
+
+/* PROPOSE */
+.c-propose{background:var(--navy);border-radius:16px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background-image:radial-gradient(ellipse at 80% 50%,rgba(201,154,62,.12) 0%,transparent 60%)}
+.c-propose-text h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:white;margin-bottom:6px}
+.c-propose-text p{font-size:14px;color:#7a9ab8;font-weight:300;max-width:560px}
+
+/* VOTING SCREEN */
+#screen-voting{display:none;min-height:100vh;background:var(--paper)}
+.vote-container{max-width:680px;margin:0 auto;padding:32px 24px 80px}
+.vote-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px}
+.vote-back{background:none;border:1px solid var(--line);padding:8px 16px;border-radius:999px;font-size:13px;color:var(--navy);cursor:pointer;font-family:'IBM Plex Sans',sans-serif;transition:all .2s}
+.vote-back:hover{background:var(--navy);color:white;border-color:var(--navy)}
+.vote-title-sm{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-align:center;max-width:280px}
+.vote-progress-top{display:flex;align-items:center;gap:8px}
+.vp-count{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--navy);white-space:nowrap}
+.vp-mini{height:4px;width:80px;background:var(--line);border-radius:999px;overflow:hidden}
+.vp-mini-fill{height:100%;background:var(--gold);border-radius:999px;transition:width .4s}
+
+/* STATEMENT CARD */
+.stmt-wrap{perspective:1000px;margin-bottom:32px;position:relative;min-height:280px}
+.stmt-card{background:white;border:1px solid var(--line);border-radius:20px;padding:36px;box-shadow:0 8px 32px rgba(14,26,38,.08);transition:transform .25s,opacity .25s;position:relative}
+.stmt-card.slide-out-right{transform:translateX(120%) rotate(8deg);opacity:0}
+.stmt-card.slide-out-left{transform:translateX(-120%) rotate(-8deg);opacity:0}
+.stmt-card.slide-in{transform:translateX(0) rotate(0);opacity:1}
+.stmt-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.stmt-num{font-family:'Playfair Display',serif;font-size:13px;color:var(--line);font-weight:700;margin-bottom:8px}
+.stmt-text{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);line-height:1.45;margin-bottom:20px}
+.stmt-hint{font-size:12px;color:var(--muted);font-style:italic}
+.stmt-swipe-hint{display:flex;justify-content:space-between;font-size:11px;color:var(--line);font-family:'IBM Plex Mono',monospace;padding:0 4px;margin-bottom:8px}
+
+/* VOTE BUTTONS */
+.vote-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px}
+.vbtn{padding:16px 8px;border-radius:14px;border:2px solid var(--line);background:white;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:14px;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:6px}
+.vbtn-icon{font-size:24px;line-height:1}
+.vbtn-label{font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.5px;text-transform:uppercase}
+.vbtn-disagree{color:var(--red)}
+.vbtn-disagree:hover,.vbtn-disagree.active{background:var(--red);border-color:var(--red);color:white;transform:scale(1.04)}
+.vbtn-pass{color:var(--muted)}
+.vbtn-pass:hover,.vbtn-pass.active{background:var(--muted);border-color:var(--muted);color:white;transform:scale(1.04)}
+.vbtn-agree{color:var(--green)}
+.vbtn-agree:hover,.vbtn-agree.active{background:var(--green);border-color:var(--green);color:white;transform:scale(1.04)}
+.vote-keyboard{text-align:center;font-size:11px;color:var(--line);font-family:'IBM Plex Mono',monospace}
+.vote-prev{display:flex;justify-content:center;margin-top:12px}
+.btn-prev{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;padding:4px 8px;transition:color .2s}
+.btn-prev:hover{color:var(--navy)}
+.btn-prev:disabled{opacity:.3;cursor:default}
+
+/* RESULTS SCREEN */
+#screen-results{display:none;background:var(--paper)}
+.results-hero{background:var(--navy);padding:56px 48px 48px;border-bottom:5px solid var(--gold);background-image:radial-gradient(ellipse at 70% 30%,rgba(201,154,62,.15) 0%,transparent 55%)}
+.results-hero-inner{max-width:1180px;margin:0 auto}
+.results-hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,48px);font-weight:900;color:white;margin-bottom:8px}
+.results-hero p{font-size:16px;color:#a8c0d8;font-weight:300;max-width:580px}
+.results-body{max-width:1180px;margin:0 auto;padding:56px 48px}
+
+/* VOTE SUMMARY */
+.vote-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px}
+.vs-item{background:white;border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center}
+.vs-num{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;line-height:1;margin-bottom:4px}
+.vs-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.vs-agree .vs-num{color:var(--green)}
+.vs-disagree .vs-num{color:var(--red)}
+.vs-pass .vs-num{color:var(--muted)}
+
+/* CONSENSUS MAP */
+.cmap-section{margin-bottom:48px}
+.cmap-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.cmap-desc{font-size:13px;color:var(--muted);margin-bottom:16px;font-weight:300}
+.cmap-wrap{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;overflow:hidden}
+canvas#cmap{width:100%;max-width:100%;height:auto;display:block}
+.cmap-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;justify-content:center}
+.cl-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace}
+.cl-dot{width:12px;height:12px;border-radius:50%}
+
+/* BRIDGING STATEMENTS */
+.bridge-section{margin-bottom:48px}
+.bridge-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:16px}
+.bridge-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bridge-card{background:white;border-radius:12px;padding:18px;border-left:4px solid}
+.bridge-agree{border-color:var(--green)}
+.bridge-disagree{border-color:var(--red)}
+.bridge-mixed{border-color:var(--gold)}
+.bridge-cat{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.bridge-agree .bridge-cat{color:var(--green)}
+.bridge-disagree .bridge-cat{color:var(--red)}
+.bridge-mixed .bridge-cat{color:var(--gold)}
+.bridge-text{font-size:14px;color:var(--navy);line-height:1.5;font-style:italic}
+.bridge-sim{font-size:11px;color:var(--muted);margin-top:6px;font-family:'IBM Plex Mono',monospace}
+
+/* SYNTHESIS */
+.synthesis-section{background:var(--navy);border-radius:20px;padding:40px;margin-bottom:40px;background-image:radial-gradient(ellipse at 80%,rgba(201,154,62,.1) 0%,transparent 60%)}
+.synthesis-kicker{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);margin-bottom:12px}
+.synthesis-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:white;margin-bottom:20px}
+.synthesis-body{font-size:14.5px;color:#a8c0d8;line-height:1.8;font-weight:300}
+.synthesis-body strong{color:white;font-weight:600}
+.synthesis-body p{margin-bottom:12px}
+
+/* QUORUM / THRESHOLD */
+.status-section{background:white;border:1px solid var(--line);border-radius:16px;padding:28px;margin-bottom:40px}
+.status-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:18px}
+.status-row{display:flex;align-items:center;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.status-label{font-size:13px;color:var(--navy);min-width:140px;font-weight:500}
+.status-bar-wrap{flex:1;background:var(--line);height:10px;border-radius:999px;overflow:hidden;min-width:120px}
+.status-bar-fill{height:100%;border-radius:999px;transition:width .8s}
+.status-pct{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--navy);min-width:36px}
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-size:12px;font-family:'IBM Plex Mono',monospace;font-weight:600;margin-top:4px}
+.status-open{background:#eef4fb;color:#1a4a7a}
+.status-approved{background:#eef8f2;color:#2a6648}
+.status-pending{background:#fff7e0;color:#7a5a1a}
+
+/* ACTIONS */
+.results-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.share-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.share-btn{background:var(--paper);border:1px solid var(--line);padding:8px 16px;border-radius:999px;font-size:12px;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;color:var(--navy);transition:all .2s;display:flex;align-items:center;gap:6px}
+.share-btn:hover{background:var(--navy);color:white;border-color:var(--navy)}
+.results-note{font-size:12px;color:var(--muted);font-style:italic;line-height:1.6;max-width:600px}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .c-hero{padding:48px 24px 40px}
+  .c-list{padding:40px 24px}
+  .vote-container{padding:24px 16px 60px}
+  .results-body{padding:32px 24px}
+  .results-hero{padding:40px 24px}
+  .bridge-grid{grid-template-columns:1fr}
+  .vote-summary{grid-template-columns:repeat(3,1fr)}
+  .stmt-text{font-size:16px}
+  .vbtn{padding:14px 6px}
+  .vbtn-icon{font-size:20px}
+  .c-propose{padding:28px 24px}
+  .method-bar{padding:18px 24px}
+  .topnav{padding:10px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- BACK NAV -->
+<nav class="topnav">
+  <a href="index.html" class="topnav-back"><span>←</span> Renacer Nicaragua</a>
+  <span class="topnav-title">Consultas Ciudadanas</span>
+  <a href="index.html#unete" class="topnav-cta">Únete al movimiento</a>
+</nav>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           SCREEN: LIST                  ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="screen-list">
+
+  <div class="c-hero">
+    <div class="c-hero-inner">
+      <div class="kicker">Renacer Nicaragua · Democracia participativa</div>
+      <h1>Consultas<br><em>Ciudadanas</em></h1>
+      <p>Vota proposición a proposición, construye consensos y define la posición oficial del movimiento. Inspirado en la metodología de participación democrática de pol.is y vTaiwan.</p>
+      <div class="c-hero-meta">
+        <div class="meta-item"><div class="meta-dot"></div>Una proposición a la vez — sin sesgos de anclaje</div>
+        <div class="meta-item"><div class="meta-dot"></div>Acuerdo · Indeciso · Desacuerdo</div>
+        <div class="meta-item"><div class="meta-dot"></div>Consultas vinculantes y consultivas</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="method-bar">
+    <div class="method-inner">
+      <span class="method-label">Metodología</span>
+      <div class="method-items">
+        <span class="method-chip">pol.is · una propuesta a la vez</span>
+        <span class="method-chip">vTaiwan · mapa de consenso</span>
+        <span class="method-chip">Resultados vinculantes para RN</span>
+        <span class="method-chip">Síntesis tipo Talk to the City</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-list">
+    <div class="c-list-header">
+      <div class="sec-kicker">Consultas activas</div>
+      <h2 class="sec-title">Propuestas abiertas a votación</h2>
+      <div class="divider"></div>
+      <p class="sec-desc">Cada consulta contiene proposiciones concretas derivadas de los foros Nicaragua Decide. Las consultas <strong>vinculantes</strong> comprometen la posición oficial del movimiento cuando se alcanza el quórum y el umbral de acuerdo. Las <strong>informativas</strong> alimentan el debate interno.</p>
+    </div>
+
+    <div class="c-cards" id="c-cards">
+      <!-- Cards rendered by JS -->
+    </div>
+
+    <div class="c-propose">
+      <div class="c-propose-text">
+        <h3>¿Tienes una propuesta para someter a consulta?</h3>
+        <p>Cualquier miembro de Renacer Nicaragua puede proponer una consulta a partir de un debate en los foros o una discusión en su red territorial. La Comisión de Organización la evalúa y la activa.</p>
+      </div>
+      <a href="mailto:Info.RenacerNi2018@proton.me?subject=Propuesta%20de%20consulta%20ciudadana&body=Descripción%20de%20la%20propuesta%3A%0A%0AProposiciones%20sugeridas%3A%0A%0AFuente%20(foro%2Fblog)%3A" class="btn-gold">Proponer una consulta →</a>
+    </div>
+  </div>
+
+</div><!-- /#screen-list -->
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║         SCREEN: VOTING                  ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="screen-voting">
+  <div class="vote-container">
+    <div class="vote-header">
+      <button class="vote-back" onclick="exitVoting()">← Volver</button>
+      <div class="vote-title-sm" id="vote-title-sm"></div>
+      <div class="vote-progress-top">
+        <span class="vp-count"><span id="vp-cur">1</span>/<span id="vp-tot">8</span></span>
+        <div class="vp-mini"><div class="vp-mini-fill" id="vp-mini-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="stmt-swipe-hint">
+      <span>← Desacuerdo</span>
+      <span>Acuerdo →</span>
+    </div>
+
+    <div class="stmt-wrap">
+      <div class="stmt-card" id="stmt-card">
+        <div class="stmt-tag" id="stmt-tag"></div>
+        <div class="stmt-num" id="stmt-num"></div>
+        <div class="stmt-text" id="stmt-text"></div>
+        <div class="stmt-hint">Vota esta proposición según tu criterio personal.</div>
+      </div>
+    </div>
+
+    <div class="vote-btns">
+      <button class="vbtn vbtn-disagree" onclick="handleVote('disagree')" id="btn-disagree">
+        <span class="vbtn-icon">✗</span>
+        <span class="vbtn-label">Desacuerdo</span>
+      </button>
+      <button class="vbtn vbtn-pass" onclick="handleVote('pass')" id="btn-pass">
+        <span class="vbtn-icon">—</span>
+        <span class="vbtn-label">Indeciso</span>
+      </button>
+      <button class="vbtn vbtn-agree" onclick="handleVote('agree')" id="btn-agree">
+        <span class="vbtn-icon">✓</span>
+        <span class="vbtn-label">Acuerdo</span>
+      </button>
+    </div>
+
+    <div class="vote-keyboard">A = Acuerdo &nbsp;·&nbsp; D = Desacuerdo &nbsp;·&nbsp; Espacio = Indeciso &nbsp;·&nbsp; ← Deshacer</div>
+    <div class="vote-prev">
+      <button class="btn-prev" id="btn-prev" onclick="goBack()" disabled>← Deshacer último voto</button>
+    </div>
+  </div>
+</div><!-- /#screen-voting -->
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║         SCREEN: RESULTS                 ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="screen-results">
+
+  <div class="results-hero">
+    <div class="results-hero-inner">
+      <div class="kicker">Tus resultados · Consulta ciudadana</div>
+      <h1 id="results-title">Resultados</h1>
+      <p id="results-sub">Tu posición en el mapa de consenso.</p>
+    </div>
+  </div>
+
+  <div class="results-body">
+
+    <!-- Vote summary -->
+    <div class="vote-summary">
+      <div class="vs-item vs-agree"><div class="vs-num" id="res-agree">0</div><div class="vs-label">Acuerdo</div></div>
+      <div class="vs-item vs-disagree"><div class="vs-num" id="res-disagree">0</div><div class="vs-label">Desacuerdo</div></div>
+      <div class="vs-item vs-pass"><div class="vs-num" id="res-pass">0</div><div class="vs-label">Indeciso</div></div>
+    </div>
+
+    <!-- Quorum / Threshold (for binding consultations) -->
+    <div class="status-section" id="status-section">
+      <div class="status-title">Estado de la consulta vinculante</div>
+      <div id="status-content"></div>
+    </div>
+
+    <!-- Consensus map -->
+    <div class="cmap-section">
+      <div class="cmap-title">Mapa de consenso</div>
+      <div class="cmap-desc">Cada círculo representa una proposición. Tu posición (●) junto a la distribución estimada de la comunidad. Eje X: grado de acuerdo. Eje Y: nivel de consenso vs. divergencia.</div>
+      <div class="cmap-wrap">
+        <canvas id="cmap" width="760" height="340"></canvas>
+        <div class="cmap-legend">
+          <div class="cl-item"><div class="cl-dot" style="background:var(--green)"></div>Tu voto: Acuerdo</div>
+          <div class="cl-item"><div class="cl-dot" style="background:var(--red)"></div>Tu voto: Desacuerdo</div>
+          <div class="cl-item"><div class="cl-dot" style="background:var(--muted)"></div>Tu voto: Indeciso</div>
+          <div class="cl-item"><div class="cl-dot" style="background:rgba(100,140,180,.35);border:1px solid rgba(100,140,180,.5)"></div>Distribución estimada comunidad</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bridging statements -->
+    <div class="bridge-section">
+      <div class="bridge-title">Puntos de encuentro y tensión</div>
+      <div class="bridge-grid" id="bridge-grid"></div>
+    </div>
+
+    <!-- Synthesis -->
+    <div class="synthesis-section">
+      <div class="synthesis-kicker">Síntesis · Talk to the City</div>
+      <div class="synthesis-title">Tu perfil de posiciones</div>
+      <div class="synthesis-body" id="synthesis-body"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="results-actions">
+      <button class="btn-gold" onclick="submitVotes()">📨 Registrar mi voto</button>
+      <button class="btn-navy" onclick="backToList()">← Ver otras consultas</button>
+      <button class="btn-outline" onclick="restartConsultation()">↺ Revisar mis votos</button>
+    </div>
+    <div class="share-row">
+      <button class="share-btn" onclick="shareResults()">🔗 Compartir mis resultados</button>
+      <a href="foros.html" class="share-btn">📋 Ver todos los temas del foro</a>
+      <a href="index.html#unete" class="share-btn">✋ Únete al movimiento</a>
+    </div>
+    <p class="results-note" style="margin-top:16px" id="results-note"></p>
+
+  </div>
+</div><!-- /#screen-results -->
+
+<script>
+/* =========================================================
+   DATA
+   ========================================================= */
+const CONSULTATIONS = [
+  {
+    id: 'c1',
+    title: 'Transición democrática: principios no negociables',
+    source: 'Foros Nicaragua Decide · Eje Transición y Justicia',
+    type: 'vinculante',
+    color: '#c99a3e',
+    quorum: 45,
+    threshold: 70,
+    simVotes: 18,
+    deadline: '31 jul 2026',
+    desc: 'Consulta vinculante que establece los principios mínimos que Renacer Nicaragua exigirá en cualquier proceso de transición. Los resultados orientarán la posición oficial del movimiento.',
+    statements: [
+      { id:'c1s1', text:'La mesa de transición debe incluir una cláusula de cero ambición que impida a sus miembros postularse a cargos en el gobierno resultante.', group:'gobernanza', sim:{agree:82,disagree:8,pass:10} },
+      { id:'c1s2', text:'Los nicaragüenses en el exilio deben tener representación garantizada y con derecho a voto en cualquier mesa de transición.', group:'representación', sim:{agree:75,disagree:14,pass:11} },
+      { id:'c1s3', text:'Debe existir un mecanismo formal para impedir que operadores del régimen actual se reciclen en el nuevo gobierno sin pasar por un proceso de responsabilidad.', group:'accountability', sim:{agree:91,disagree:5,pass:4} },
+      { id:'c1s4', text:'La reconciliación nacional solo es posible después de un proceso verificable de verdad, responsabilidad y reparación — no antes.', group:'justicia', sim:{agree:64,disagree:24,pass:12} },
+      { id:'c1s5', text:'Los responsables de crímenes graves deben reconocerlos públicamente como condición para cualquier beneficio en el proceso de reconciliación.', group:'justicia', sim:{agree:71,disagree:19,pass:10} },
+      { id:'c1s6', text:'Es justo y necesario distinguir entre responsabilidad penal, política e institucional, y aplicar consecuencias distintas a cada nivel.', group:'accountability', sim:{agree:88,disagree:6,pass:6} },
+      { id:'c1s7', text:'Nicaragua debe someter su proceso de reforma institucional a supervisión internacional durante al menos cinco años posteriores a la transición.', group:'supervisión', sim:{agree:59,disagree:28,pass:13} },
+      { id:'c1s8', text:'Una reforma constitucional profunda debe ser condición sine qua non de la transición, no un objetivo posterior.', group:'institucional', sim:{agree:67,disagree:21,pass:12} }
+    ]
+  },
+  {
+    id: 'c2',
+    title: 'Autonomía real para la Costa Caribe',
+    source: 'Foros Nicaragua Decide · Eje Costa Caribe y Territorio',
+    type: 'informativa',
+    color: '#2a6648',
+    simVotes: 11,
+    deadline: 'Abierta',
+    desc: 'Consulta informativa para construir la posición de Renacer Nicaragua sobre derechos territoriales, autonomía y representación de los pueblos de la Costa Caribe.',
+    statements: [
+      { id:'c2s1', text:'Los Consejos Regionales Autónomos deben tener poder real de veto sobre cualquier proyecto extractivo, minero o de infraestructura en sus territorios.', group:'autonomía', sim:{agree:84,disagree:9,pass:7} },
+      { id:'c2s2', text:'Debe crearse un Fondo de Reparación Territorial financiado con activos recuperados del régimen para compensar comunidades indígenas desplazadas.', group:'reparación', sim:{agree:79,disagree:11,pass:10} },
+      { id:'c2s3', text:'La representación de la Costa Caribe en la Asamblea Nacional debe ser proporcional y garantizada constitucionalmente mediante escaños reservados.', group:'representación', sim:{agree:72,disagree:16,pass:12} },
+      { id:'c2s4', text:'Las concesiones mineras actuales en territorios indígenas deben ser auditadas y canceladas si violaron el derecho a consulta previa, libre e informada.', group:'recursos', sim:{agree:86,disagree:8,pass:6} },
+      { id:'c2s5', text:'El proceso de saneamiento territorial debe incluir mecanismos específicos y justos para los casos de colonos que ocuparon tierras indígenas de buena fe.', group:'saneamiento', sim:{agree:61,disagree:25,pass:14} },
+      { id:'c2s6', text:'Sin Costa Caribe libre, protegida y con autonomía real, no puede existir una democracia completa en Nicaragua.', group:'principio', sim:{agree:93,disagree:4,pass:3} }
+    ]
+  },
+  {
+    id: 'c3',
+    title: 'Condiciones mínimas para elecciones libres',
+    source: 'Foros Nicaragua Decide · Eje Reconstrucción Institucional',
+    type: 'vinculante',
+    color: '#1a4a7a',
+    quorum: 30,
+    threshold: 75,
+    simVotes: 22,
+    deadline: '15 ago 2026',
+    desc: 'Consulta vinculante sobre los requisitos mínimos que RN exigirá para reconocer cualquier proceso electoral como legítimo. El resultado compromete la posición oficial del movimiento.',
+    statements: [
+      { id:'c3s1', text:'El nuevo Consejo Supremo Electoral debe ser elegido mediante un proceso técnico e independiente, verificado por la ciudadanía y con participación de observadores internacionales.', group:'electoral', sim:{agree:96,disagree:2,pass:2} },
+      { id:'c3s2', text:'La observación electoral internacional debe ser permanente, no solo durante los períodos de votación o campaña.', group:'supervisión', sim:{agree:78,disagree:14,pass:8} },
+      { id:'c3s3', text:'Durante la transición, los partidos políticos no deben acceder a fondos estatales que generen ventaja frente a nuevas organizaciones políticas.', group:'equidad', sim:{agree:55,disagree:33,pass:12} },
+      { id:'c3s4', text:'Los nicaragüenses en el exilio deben tener derecho garantizado al voto en todas las elecciones nacionales desde su país de residencia.', group:'diáspora', sim:{agree:89,disagree:6,pass:5} },
+      { id:'c3s5', text:'Deben anularse automáticamente todas las condenas penales dictadas por el sistema judicial durante el régimen de Ortega-Murillo.', group:'justicia', sim:{agree:74,disagree:18,pass:8} },
+      { id:'c3s6', text:'La Policía Nacional y el Ejército deben someterse a supervisión civil permanente e independiente como condición previa a cualquier elección.', group:'seguridad', sim:{agree:83,disagree:10,pass:7} },
+      { id:'c3s7', text:'Las empresas del Ejército (IPSM) deben ser auditadas por órganos civiles independientes antes de que se realicen elecciones.', group:'transparencia', sim:{agree:88,disagree:8,pass:4} }
+    ]
+  }
+];
+
+/* =========================================================
+   STATE
+   ========================================================= */
+let activeConsultation = null;
+let currentIndex = 0;
+let userVotes = {}; // { statementId: 'agree'|'disagree'|'pass' }
+const STORAGE_PREFIX = 'rn_consulta_';
+
+/* =========================================================
+   SCREEN MANAGEMENT
+   ========================================================= */
+function showScreen(id) {
+  ['screen-list','screen-voting','screen-results'].forEach(s => {
+    document.getElementById(s).style.display = s === id ? 'block' : 'none';
+  });
+  window.scrollTo(0,0);
+}
+
+/* =========================================================
+   RENDER CONSULTATION LIST
+   ========================================================= */
+function renderList() {
+  const container = document.getElementById('c-cards');
+  container.innerHTML = CONSULTATIONS.map(c => {
+    const stored = loadVotes(c.id);
+    const done = stored && Object.keys(stored).length === c.statements.length;
+    const progress = stored ? Math.round(Object.keys(stored).length / c.statements.length * 100) : 0;
+    const isBind = c.type === 'vinculante';
+    return `
+      <div class="c-card">
+        <div class="c-card-top" style="background:${c.color}"></div>
+        <div class="c-card-body">
+          <div class="c-badge ${isBind?'badge-vinculante':'badge-informativa'}">${isBind?'● Vinculante':'○ Informativa'}</div>
+          <div class="c-card-title">${c.title}</div>
+          <div class="c-card-source">📋 ${c.source}</div>
+          <div class="c-card-desc">${c.desc}</div>
+          <div class="c-card-stats">
+            <span class="c-stat"><strong>${c.statements.length}</strong> proposiciones</span>
+            <span class="c-stat"><strong>${c.simVotes}</strong> votos registrados</span>
+            ${isBind ? `<span class="c-stat">Quórum: <strong>${c.simVotes}/${c.quorum}</strong></span>` : ''}
+          </div>
+          ${progress > 0 ? `
+          <div class="c-progress-wrap">
+            <div class="c-progress-label">
+              <span>Tu progreso</span><span>${progress}%</span>
+            </div>
+            <div class="c-progress"><div class="c-progress-fill" style="width:${progress}%"></div></div>
+          </div>` : ''}
+          ${isBind ? `<div class="c-quorum">⚠️ Umbral de aprobación: <strong>${c.threshold}% de acuerdo</strong> necesario</div>` : ''}
+        </div>
+        <div class="c-card-footer">
+          <span class="c-deadline">📅 ${c.deadline}</span>
+          <button class="c-btn-start" onclick="startConsultation('${c.id}')">${done?'Ver mis resultados →':'Participar →'}</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* =========================================================
+   START CONSULTATION
+   ========================================================= */
+function startConsultation(id) {
+  activeConsultation = CONSULTATIONS.find(c => c.id === id);
+  userVotes = loadVotes(id) || {};
+  const done = Object.keys(userVotes).length === activeConsultation.statements.length;
+  if (done) {
+    showResults();
+    return;
+  }
+  // Find first unvoted statement
+  currentIndex = activeConsultation.statements.findIndex(s => !userVotes[s.id]);
+  if (currentIndex === -1) currentIndex = 0;
+  showScreen('screen-voting');
+  renderStatement();
+}
+
+function exitVoting() {
+  saveVotes(activeConsultation.id, userVotes);
+  showScreen('screen-list');
+  renderList();
+}
+
+/* =========================================================
+   VOTING LOGIC
+   ========================================================= */
+function renderStatement() {
+  const c = activeConsultation;
+  const s = c.statements[currentIndex];
+  const total = c.statements.length;
+
+  document.getElementById('vote-title-sm').textContent = c.title;
+  document.getElementById('vp-cur').textContent = currentIndex + 1;
+  document.getElementById('vp-tot').textContent = total;
+  document.getElementById('vp-mini-fill').style.width = ((currentIndex / total) * 100) + '%';
+
+  // Animate card
+  const card = document.getElementById('stmt-card');
+  card.classList.remove('slide-out-right','slide-out-left','slide-in');
+  void card.offsetWidth; // reflow
+  card.classList.add('slide-in');
+
+  document.getElementById('stmt-tag').textContent = `[${s.group}]`;
+  document.getElementById('stmt-num').textContent = `Proposición ${currentIndex + 1} de ${total}`;
+  document.getElementById('stmt-text').textContent = s.text;
+
+  // Restore existing vote if any
+  const existing = userVotes[s.id];
+  ['btn-agree','btn-disagree','btn-pass'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('active');
+    if ((id === 'btn-agree' && existing === 'agree') ||
+        (id === 'btn-disagree' && existing === 'disagree') ||
+        (id === 'btn-pass' && existing === 'pass')) {
+      el.classList.add('active');
+    }
+  });
+
+  document.getElementById('btn-prev').disabled = (currentIndex === 0);
+}
+
+function handleVote(decision) {
+  const s = activeConsultation.statements[currentIndex];
+  userVotes[s.id] = decision;
+  saveVotes(activeConsultation.id, userVotes);
+
+  // Button flash animation
+  const map = {agree:'btn-agree', disagree:'btn-disagree', pass:'btn-pass'};
+  const btn = document.getElementById(map[decision]);
+  btn.classList.add('active');
+
+  const card = document.getElementById('stmt-card');
+  const dir = decision === 'agree' ? 'slide-out-right' : decision === 'disagree' ? 'slide-out-left' : 'slide-out-right';
+
+  setTimeout(() => {
+    card.classList.add(dir);
+    setTimeout(() => {
+      card.classList.remove(dir, 'slide-in');
+      ['btn-agree','btn-disagree','btn-pass'].forEach(id => document.getElementById(id).classList.remove('active'));
+
+      if (currentIndex < activeConsultation.statements.length - 1) {
+        currentIndex++;
+        renderStatement();
+      } else {
+        showResults();
+      }
+    }, 220);
+  }, 120);
+}
+
+function goBack() {
+  if (currentIndex <= 0) return;
+  currentIndex--;
+  renderStatement();
+}
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (document.getElementById('screen-voting').style.display === 'none') return;
+  if (e.key === 'ArrowRight' || e.key === 'a' || e.key === 'A') handleVote('agree');
+  else if (e.key === 'ArrowLeft' || e.key === 'd' || e.key === 'D') handleVote('disagree');
+  else if (e.key === ' ' || e.key === 'p' || e.key === 'P') { e.preventDefault(); handleVote('pass'); }
+  else if (e.key === 'ArrowUp' || e.key === 'Backspace') goBack();
+});
+
+// Touch swipe
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive:true});
+document.addEventListener('touchend', e => {
+  if (document.getElementById('screen-voting').style.display === 'none') return;
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  if (Math.abs(dx) > 60) handleVote(dx > 0 ? 'agree' : 'disagree');
+}, {passive:true});
+
+/* =========================================================
+   RESULTS
+   ========================================================= */
+function showResults() {
+  saveVotes(activeConsultation.id, userVotes);
+  const c = activeConsultation;
+  const votes = userVotes;
+
+  let agree = 0, disagree = 0, pass = 0;
+  c.statements.forEach(s => {
+    const v = votes[s.id] || 'pass';
+    if (v === 'agree') agree++;
+    else if (v === 'disagree') disagree++;
+    else pass++;
+  });
+
+  document.getElementById('results-title').textContent = c.title;
+  document.getElementById('results-sub').textContent = `${c.statements.length} proposiciones · ${c.source}`;
+  document.getElementById('res-agree').textContent = agree;
+  document.getElementById('res-disagree').textContent = disagree;
+  document.getElementById('res-pass').textContent = pass;
+
+  // Quorum/threshold section
+  const statusSec = document.getElementById('status-section');
+  if (c.type === 'vinculante') {
+    statusSec.style.display = 'block';
+    const simAgree = Math.round(c.statements.reduce((a,s) => a + s.sim.agree, 0) / c.statements.length);
+    const qPct = Math.round((c.simVotes / c.quorum) * 100);
+    document.getElementById('status-content').innerHTML = `
+      <div class="status-row">
+        <span class="status-label">Quórum de participación</span>
+        <div class="status-bar-wrap"><div class="status-bar-fill" style="width:${Math.min(qPct,100)}%;background:#c99a3e"></div></div>
+        <span class="status-pct">${c.simVotes}/${c.quorum}</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Acuerdo estimado</span>
+        <div class="status-bar-wrap"><div class="status-bar-fill" style="width:${simAgree}%;background:${simAgree>=c.threshold?'#2a6648':'#c99a3e'}"></div></div>
+        <span class="status-pct">${simAgree}%</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Estado actual</span>
+        <span class="status-badge ${c.simVotes >= c.quorum ? 'status-approved' : 'status-open'}">${c.simVotes >= c.quorum ? '✓ Quórum alcanzado' : '⏳ En proceso — falta quórum'}</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:8px">Umbral requerido: ${c.threshold}% de acuerdo. Quórum: ${c.quorum} miembros.</div>
+    `;
+  } else {
+    statusSec.style.display = 'none';
+  }
+
+  renderConsensusMap(c, votes);
+  renderBridging(c, votes);
+  renderSynthesis(c, votes, agree, disagree, pass);
+
+  document.getElementById('results-note').textContent = c.type === 'vinculante'
+    ? `Consulta vinculante. Al alcanzar el quórum de ${c.quorum} miembros y el umbral del ${c.threshold}% de acuerdo, el resultado compromete la posición oficial de Renacer Nicaragua. Los datos de esta sesión se almacenan localmente. Para que tu voto se contabilice oficialmente, usa el botón "Registrar mi voto".`
+    : `Consulta informativa. Los resultados alimentan el debate interno de Renacer Nicaragua. Para que tu voto se incorpore al análisis colectivo, usa el botón "Registrar mi voto". Los datos se almacenan localmente en tu dispositivo.`;
+
+  showScreen('screen-results');
+}
+
+/* =========================================================
+   CANVAS CONSENSUS MAP
+   ========================================================= */
+function renderConsensusMap(c, votes) {
+  const canvas = document.getElementById('cmap');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width;
+  const H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // Background gradient (red-left to green-right, dark-top to light-bottom)
+  const grad = ctx.createLinearGradient(0, 0, W, H);
+  grad.addColorStop(0,   'rgba(159,47,47,.06)');
+  grad.addColorStop(0.5, 'rgba(247,243,236,.1)');
+  grad.addColorStop(1,   'rgba(42,102,72,.06)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(221,213,196,.5)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 6]);
+  // Vertical center
+  ctx.beginPath(); ctx.moveTo(W/2, 20); ctx.lineTo(W/2, H-30); ctx.stroke();
+  // Horizontal center
+  ctx.beginPath(); ctx.moveTo(60, H/2); ctx.lineTo(W-20, H/2); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Axis labels
+  ctx.fillStyle = 'rgba(107,122,141,.7)';
+  ctx.font = '11px "IBM Plex Mono",monospace';
+  ctx.fillText('← DESACUERDO', 8, H/2 - 8);
+  ctx.textAlign = 'right';
+  ctx.fillText('ACUERDO →', W - 8, H/2 - 8);
+  ctx.textAlign = 'left';
+  ctx.fillStyle = 'rgba(107,122,141,.55)';
+  ctx.font = '10px "IBM Plex Mono",monospace';
+  ctx.fillText('Dividido', 8, 28);
+  ctx.fillText('Consenso', 8, H - 16);
+
+  // Plot each statement
+  c.statements.forEach((s, i) => {
+    const vote = votes[s.id] || 'pass';
+    const sim = s.sim;
+
+    // X: user vote position
+    const baseX = vote === 'agree' ? 0.78 : vote === 'disagree' ? 0.22 : 0.50;
+    const jitter = (Math.sin(i * 2.7) * 0.06); // slight jitter to avoid overlap
+    const x = Math.min(0.92, Math.max(0.08, baseX + jitter)) * W;
+
+    // Y: controversy level (0=low=bottom=consensus, 1=high=top=divided)
+    const controversy = 1 - Math.abs(sim.agree - sim.disagree) / 100;
+    const y = (0.12 + controversy * 0.76) * H;
+
+    // Community distribution cloud (small dots)
+    const cloudN = 18;
+    for (let j = 0; j < cloudN; j++) {
+      const angle = (j / cloudN) * Math.PI * 2;
+      const r = 24 + Math.sin(j * 1.3) * 8;
+      const cx2 = x + Math.cos(angle) * r * (sim.agree / 80);
+      const cy2 = y + Math.sin(angle) * r * 0.6;
+      ctx.beginPath();
+      ctx.arc(cx2, cy2, 3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(100,140,180,.22)';
+      ctx.fill();
+    }
+
+    // User vote dot (larger)
+    const color = vote === 'agree' ? '#2a6648' : vote === 'disagree' ? '#9f2f2f' : '#8a9cb0';
+    ctx.beginPath();
+    ctx.arc(x, y, 13, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Statement number label
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 10px "IBM Plex Mono",monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText((i + 1).toString(), x, y + 4);
+    ctx.textAlign = 'left';
+  });
+}
+
+/* =========================================================
+   BRIDGING STATEMENTS
+   ========================================================= */
+function renderBridging(c, votes) {
+  const grid = document.getElementById('bridge-grid');
+  // Sort: agree first, then disagree, then mixed
+  const items = c.statements.map(s => {
+    const v = votes[s.id] || 'pass';
+    const sim = s.sim;
+    const controversy = Math.abs(sim.agree - sim.disagree);
+    return {...s, userVote: v, controversy, consensus: controversy > 50};
+  });
+
+  const agreed = items.filter(s => s.userVote === 'agree' && s.sim.agree >= 70).slice(0, 2);
+  const disagreed = items.filter(s => s.userVote === 'disagree').slice(0, 2);
+  const mixed = items.filter(s => s.sim.agree >= 40 && s.sim.agree <= 65).slice(0, 2);
+
+  let html = '';
+  agreed.forEach(s => {
+    html += `<div class="bridge-card bridge-agree">
+      <div class="bridge-cat">✓ Punto de encuentro</div>
+      <div class="bridge-text">"${s.text}"</div>
+      <div class="bridge-sim">${s.sim.agree}% acuerdo estimado en comunidad · grupo: ${s.group}</div>
+    </div>`;
+  });
+  disagreed.forEach(s => {
+    html += `<div class="bridge-card bridge-disagree">
+      <div class="bridge-cat">✗ Punto de tensión (tu posición)</div>
+      <div class="bridge-text">"${s.text}"</div>
+      <div class="bridge-sim">${s.sim.agree}% acuerdo estimado en comunidad · grupo: ${s.group}</div>
+    </div>`;
+  });
+  mixed.forEach(s => {
+    html += `<div class="bridge-card bridge-mixed">
+      <div class="bridge-cat">⚡ Proposición dividida en comunidad</div>
+      <div class="bridge-text">"${s.text}"</div>
+      <div class="bridge-sim">${s.sim.agree}% acuerdo / ${s.sim.disagree}% desacuerdo · grupo: ${s.group}</div>
+    </div>`;
+  });
+  if (!html) html = '<div style="color:var(--muted);font-size:14px;grid-column:1/-1">Vota más proposiciones para ver puntos de encuentro y tensión.</div>';
+  grid.innerHTML = html;
+}
+
+/* =========================================================
+   SYNTHESIS (Talk to the City style)
+   ========================================================= */
+function renderSynthesis(c, votes, agree, disagree, pass) {
+  const total = c.statements.length;
+  const agreePct = Math.round((agree / total) * 100);
+  const disagreePct = Math.round((disagree / total) * 100);
+
+  // Profile type
+  let profileLabel, profileDesc;
+  if (agreePct >= 70) {
+    profileLabel = 'Posición mayoritariamente afirmativa';
+    profileDesc = `Coincides con las proposiciones de esta consulta en su mayor parte (${agreePct}%). Tu perfil sugiere una disposición constructiva hacia los mecanismos propuestos.`;
+  } else if (disagreePct >= 50) {
+    profileLabel = 'Posición crítica o divergente';
+    profileDesc = `Muestras desacuerdo con la mayoría de las proposiciones (${disagreePct}%). Esto es valioso: tus objeciones deben ser parte del debate. Te invitamos a argumentarlas en los foros.`;
+  } else if (pass >= Math.floor(total / 2)) {
+    profileLabel = 'Posición indecisa o en construcción';
+    profileDesc = `Marcaste muchas proposiciones como "Indeciso" (${pass} de ${total}). Esto puede reflejar que necesitas más información o que los temas son genuinamente complejos para ti.`;
+  } else {
+    profileLabel = 'Posición matizada y plural';
+    profileDesc = `Tu distribución de votos muestra una posición matizada: ${agreePct}% de acuerdo, ${disagreePct}% de desacuerdo. Esto refleja un análisis cuidadoso, caso por caso.`;
+  }
+
+  // Convergence with community
+  let convergenceLines = [];
+  c.statements.forEach(s => {
+    const v = votes[s.id];
+    if (v === 'agree' && s.sim.agree >= 80) convergenceLines.push(`"...${s.text.slice(0,60)}..."`);
+  });
+  const convergenceText = convergenceLines.length > 0
+    ? `<strong>Convergencia con la comunidad:</strong> Tus votos coinciden con la posición mayoritaria estimada en ${convergenceLines.length} proposición(es), especialmente en puntos de alto consenso como ${convergenceLines[0] || ''}`
+    : '';
+
+  // Divergence
+  let divergenceLines = [];
+  c.statements.forEach(s => {
+    const v = votes[s.id];
+    if (v === 'disagree' && s.sim.agree >= 70) divergenceLines.push(s.text.slice(0, 60));
+  });
+  const divergenceText = divergenceLines.length > 0
+    ? `<strong>Puntos de divergencia:</strong> Tu voto difiere de la tendencia estimada de la comunidad en ${divergenceLines.length} punto(s). Esto es parte natural del debate democrático y enriquece la deliberación colectiva.`
+    : '';
+
+  document.getElementById('synthesis-body').innerHTML = `
+    <p><strong>${profileLabel}.</strong> ${profileDesc}</p>
+    ${convergenceText ? `<p>${convergenceText}</p>` : ''}
+    ${divergenceText ? `<p>${divergenceText}</p>` : ''}
+    <p><strong>Próximo paso:</strong> Registra tu voto para que sea contabilizado en la consulta oficial. Si tu posición requiere argumentación, llévala a los foros Nicaragua Decide o a tu red territorial para enriquecer el debate colectivo.</p>
+  `;
+}
+
+/* =========================================================
+   SUBMISSION & SHARING
+   ========================================================= */
+function submitVotes() {
+  const c = activeConsultation;
+  const lines = ['VOTO EN CONSULTA CIUDADANA — RENACER NICARAGUA', '='.repeat(50), `Consulta: ${c.title}`, `Tipo: ${c.type}`, `Fuente: ${c.source}`, ''];
+  c.statements.forEach((s, i) => {
+    const v = userVotes[s.id] || 'pass';
+    const label = v === 'agree' ? 'ACUERDO' : v === 'disagree' ? 'DESACUERDO' : 'INDECISO';
+    lines.push(`${i+1}. [${label}] ${s.text}`);
+  });
+  lines.push('', 'Enviado desde: ' + window.location.href);
+  const body = encodeURIComponent(lines.join('\n'));
+  window.location.href = `mailto:Info.RenacerNi2018@proton.me?subject=Voto%20consulta:%20${encodeURIComponent(c.title)}&body=${body}`;
+}
+
+function shareResults() {
+  const c = activeConsultation;
+  const text = `Participé en la consulta ciudadana "${c.title}" de Renacer Nicaragua. ¡Suma tu voz!`;
+  if (navigator.share) {
+    navigator.share({ title: 'Consulta ciudadana RN', text, url: window.location.href });
+  } else {
+    navigator.clipboard.writeText(window.location.href + '?c=' + c.id).then(() => {
+      alert('Enlace copiado. Compártelo para invitar a más personas a participar.');
+    });
+  }
+}
+
+function backToList() {
+  showScreen('screen-list');
+  renderList();
+}
+
+function restartConsultation() {
+  currentIndex = 0;
+  showScreen('screen-voting');
+  renderStatement();
+}
+
+/* =========================================================
+   LOCAL STORAGE
+   ========================================================= */
+function saveVotes(id, votes) {
+  try { localStorage.setItem(STORAGE_PREFIX + id, JSON.stringify(votes)); } catch(e) {}
+}
+function loadVotes(id) {
+  try { const d = localStorage.getItem(STORAGE_PREFIX + id); return d ? JSON.parse(d) : null; } catch(e) { return null; }
+}
+
+/* =========================================================
+   INIT
+   ========================================================= */
+renderList();
+
+// Support direct link to a consultation: ?c=c1
+const urlParams = new URLSearchParams(window.location.search);
+const directConsulta = urlParams.get('c');
+if (directConsulta) startConsultation(directConsulta);
+</script>
+</body>
+</html>
