@@ -1044,9 +1044,12 @@ function buildCard(t, cat) {
       </div>
       <div class="card-footer">
         <span class="card-meta">👥 ${t.audience.split(' · ')[0]}</span>
-        <button class="add-btn ${isSelected?'added':''}" id="btn-${t.id}" onclick="event.stopPropagation();toggleSelect('${t.id}')">
-          ${isSelected ? '✓ Agregado' : '+ Agregar'}
-        </button>
+        <div style="display:flex;gap:8px;align-items:center">
+          <a href="consulta.html" onclick="event.stopPropagation()" style="font-size:11px;color:#c99a3e;text-decoration:none;font-family:'IBM Plex Mono',monospace;letter-spacing:.5px;border:1px solid rgba(201,154,62,.4);padding:4px 9px;border-radius:999px;transition:all .2s" onmouseover="this.style.background='rgba(201,154,62,.15)'" onmouseout="this.style.background='transparent'">→ Consultar</a>
+          <button class="add-btn ${isSelected?'added':''}" id="btn-${t.id}" onclick="event.stopPropagation();toggleSelect('${t.id}')">
+            ${isSelected ? '✓ Agregado' : '+ Agregar'}
+          </button>
+        </div>
       </div>
     </div>
   `;

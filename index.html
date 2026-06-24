@@ -141,6 +141,25 @@ section{padding:80px 48px}
 .btn-navy{background:var(--navy);color:white;padding:13px 30px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;transition:all .2s;display:inline-block;font-family:'IBM Plex Sans',sans-serif;border:none;cursor:pointer}
 .btn-navy:hover{background:var(--blue);transform:translateY(-1px)}
 
+/* CONSULTAS */
+#consultas{background:var(--navy)}
+.consultas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-bottom:40px}
+.consulta-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:24px;transition:background .2s,transform .2s;cursor:pointer;text-decoration:none;display:block}
+.consulta-card:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.consulta-tipo{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.tipo-vinculante{background:rgba(201,154,62,.2);color:var(--gold-light);border:1px solid rgba(201,154,62,.35)}
+.tipo-informativa{background:rgba(26,74,122,.35);color:#90b8e0;border:1px solid rgba(26,74,122,.5)}
+.consulta-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:white;line-height:1.3;margin-bottom:12px}
+.consulta-progress{margin-bottom:10px}
+.consulta-bar-bg{height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;margin-bottom:5px}
+.consulta-bar{height:4px;background:var(--gold);border-radius:2px;transition:width .4s}
+.consulta-meta{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.45)}
+.consulta-footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
+.consulta-stmts{font-size:12px;color:rgba(255,255,255,.5);font-family:'IBM Plex Mono',monospace}
+.consulta-arrow{color:var(--gold);font-size:14px}
+.consultas-cta{text-align:center;padding-top:4px}
+.consultas-cta p{color:#7a8fa3;font-size:15px;font-weight:300;margin-bottom:18px}
+
 /* BLOG */
 #blog{background:var(--paper)}
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px;margin-bottom:60px}
@@ -239,6 +258,7 @@ footer{background:#0d1d2e;border-top:4px solid var(--gold);padding:60px 48px 36p
       <a href="#redes">Redes</a>
       <a href="#agrupaciones">Comisiones</a>
       <a href="#foros">Foros</a>
+      <a href="#consultas">Consultas</a>
       <a href="#blog">Blog</a>
       <a href="#unete" class="nav-cta">Únete</a>
     </div>
@@ -256,6 +276,7 @@ footer{background:#0d1d2e;border-top:4px solid var(--gold);padding:60px 48px 36p
   <a href="#redes" class="mob-link">Redes Territoriales</a>
   <a href="#agrupaciones" class="mob-link">Comisiones</a>
   <a href="#foros" class="mob-link">Foros de Debate</a>
+  <a href="#consultas" class="mob-link">Consultas</a>
   <a href="#blog" class="mob-link">Blog</a>
   <a href="#unete" class="mob-cta">Únete al movimiento</a>
 </div>
@@ -270,11 +291,13 @@ footer{background:#0d1d2e;border-top:4px solid var(--gold);padding:60px 48px 36p
     <div class="hero-actions">
       <a href="#unete" class="btn-gold">Únete al movimiento</a>
       <a href="foros.html" class="btn-outline">Foros Nicaragua Decide →</a>
+      <a href="consulta.html" class="btn-outline" style="border-color:rgba(201,154,62,.5);color:var(--gold-light)">Consultas ciudadanas →</a>
     </div>
     <div class="pills">
       <span class="pill">15 departamentos</span>
       <span class="pill">2 Regiones Autónomas</span>
       <span class="pill">Diáspora global</span>
+      <span class="pill">3 consultas activas</span>
       <span class="pill">Desde Abril 2018</span>
     </div>
   </div>
@@ -620,6 +643,58 @@ footer{background:#0d1d2e;border-top:4px solid var(--gold);padding:60px 48px 36p
   </div>
 </section>
 
+<!-- CONSULTAS -->
+<section id="consultas">
+  <div class="inner">
+    <div class="sec-kicker" style="color:var(--gold-light)">Democracia directa · pol.is / vTaiwan</div>
+    <h2 class="sec-title sec-title-light">Consultas Ciudadanas</h2>
+    <div class="divider"></div>
+    <p class="sec-desc sec-desc-light">Votar declaración por declaración, sin anclar tu posición. El sistema identifica los puntos de encuentro y genera el perfil de consenso del movimiento. Las consultas vinculantes con quórum validado se convierten en mandato.</p>
+    <div class="consultas-grid">
+      <a href="consulta.html?c=c1" class="consulta-card">
+        <div class="consulta-tipo tipo-vinculante">⚡ Vinculante</div>
+        <div class="consulta-title">Transición democrática: principios no negociables</div>
+        <div class="consulta-progress">
+          <div class="consulta-bar-bg"><div class="consulta-bar" style="width:40%"></div></div>
+          <div class="consulta-meta"><span>18 / 45 votos para quórum</span><span>Cierra 31 jul 2026</span></div>
+        </div>
+        <div class="consulta-footer">
+          <span class="consulta-stmts">8 declaraciones</span>
+          <span class="consulta-arrow">Votar →</span>
+        </div>
+      </a>
+      <a href="consulta.html?c=c2" class="consulta-card">
+        <div class="consulta-tipo tipo-informativa">💬 Informativa</div>
+        <div class="consulta-title">Autonomía real para la Costa Caribe</div>
+        <div class="consulta-progress">
+          <div class="consulta-bar-bg"><div class="consulta-bar" style="width:55%;background:#90b8e0"></div></div>
+          <div class="consulta-meta"><span>11 participantes</span><span>Abierta</span></div>
+        </div>
+        <div class="consulta-footer">
+          <span class="consulta-stmts">6 declaraciones</span>
+          <span class="consulta-arrow">Votar →</span>
+        </div>
+      </a>
+      <a href="consulta.html?c=c3" class="consulta-card">
+        <div class="consulta-tipo tipo-vinculante">⚡ Vinculante</div>
+        <div class="consulta-title">Condiciones mínimas para elecciones libres</div>
+        <div class="consulta-progress">
+          <div class="consulta-bar-bg"><div class="consulta-bar" style="width:73%"></div></div>
+          <div class="consulta-meta"><span>22 / 30 votos para quórum</span><span>Cierra 15 ago 2026</span></div>
+        </div>
+        <div class="consulta-footer">
+          <span class="consulta-stmts">7 declaraciones</span>
+          <span class="consulta-arrow">Votar →</span>
+        </div>
+      </a>
+    </div>
+    <div class="consultas-cta">
+      <p>Cada voz cuenta. Los resultados con quórum validado se convierten en postura oficial del movimiento.</p>
+      <a href="consulta.html" class="btn-gold">Ver todas las consultas →</a>
+    </div>
+  </div>
+</section>
+
 <!-- BLOG -->
 <section id="blog">
   <div class="inner">
@@ -810,6 +885,8 @@ footer{background:#0d1d2e;border-top:4px solid var(--gold);padding:60px 48px 36p
         <h4>Participar</h4>
         <a href="#foros">Foros Nicaragua Decide</a>
         <a href="foros.html">Banco de temas</a>
+        <a href="#consultas">Consultas ciudadanas</a>
+        <a href="consulta.html">Votar ahora</a>
         <a href="#blog">Blog y análisis</a>
         <a href="#blog">Suscripción</a>
       </div>
